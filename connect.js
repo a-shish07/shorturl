@@ -10,4 +10,3 @@ async function connectToMongo(url) {
 module.exports = {
     connectToMongo,
 }
-//new immport
