@@ -2,6 +2,8 @@ const express = require('express');
 const router = require('./routes/url');
 const { connectToMongo } = require('./connect');
 const URL = require('./models/url');
+const path = require('path');
+const staticRoute  = require("./routes/staticRouter")
 
 const app = express();
 
@@ -13,9 +15,14 @@ connectToMongo("mongodb://127.0.0.1/short-url")
     console.error('MongoDB connection failed:', err);
 });
 
+app.set("view engine","ejs");
+app.set("views", path.resolve("./views"))
+
 app.use(express.json());
 
 app.use("/url", router);
+app.use("/",staticRoute);
+
 
 app.get('/:shortId', async (req, res) => {
     const shortId = req.params.shortId;
