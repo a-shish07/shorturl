@@ -16,9 +16,10 @@ async function GenerateNewShortUrl(req, res) {
         visitHistory: [],
     });
 
-    return res.json({
-        id: ShortId
-    });
+    return res.render("home", {
+        id: ShortId,
+    })
+   
 }
 
 module.exports = {

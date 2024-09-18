@@ -12,17 +12,43 @@
 </head>
 <body>
     <h1>URL Shortener</h1>
+<!-- Backend se jo data aata hai , woh locals m hota h -->
+    <% if (locals.id) { %>
+        <p>URL Generated: http://localhost:8001/<%= id %></p>
+    <% } %>
+
     <div>
         <!--  method defines which method to be used whereas  -->
-        <form method="post" action=""> 
+        <form method="post" action="/url"> 
             <label> Enter Your Original URL</label>
             <input 
                 type="text" 
-                name="redirectURL"  placeholder="https://example.com"
+                name="url"  placeholder="https://example.com"
             />
             <!-- name is used in backend  -->
             <button type="submit">Generate</button>
         </form>
+    </div>
+
+    <div>
+        <% if (locals.urls) { %>
+         <table>
+            <thead>
+                <th>S. No</th>
+                <th>ShortID</th>
+                <th>ReDirect</th>
+            </thead>
+            <tbody>
+                <% urls.forEach((url, index) => { %>
+                <tr>
+                    <td> <%= index+1 %></td>
+                    <td><%= url.shortId %></td>
+                    <td><%= url.reDirectURL %></td>
+                </tr>
+                <% }) %>
+            </tbody>
+         </table>
+        <% } %>
     </div>
 </body>
 </html>

@@ -4,6 +4,7 @@ const { connectToMongo } = require('./connect');
 const URL = require('./models/url');
 const path = require('path');
 const staticRoute  = require("./routes/staticRouter")
+const userRoute = require('./routes/user')
 
 const app = express();
 
@@ -19,8 +20,10 @@ app.set("view engine","ejs");
 app.set("views", path.resolve("./views"))
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: false}))
 
 app.use("/url", router);
+app.use("/user" , userRoute);
 app.use("/",staticRoute);
 
 
